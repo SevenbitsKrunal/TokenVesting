@@ -1,0 +1,92 @@
+// Insert Loop
+
+pragma solidity ^0.5.0;
+contract Test{
+    uint[] data;
+
+    function loop() public returns(uint[] memory) {
+        for(uint i=0; i<=5; i++){
+            data.push(i);
+        }
+        return data;
+    }
+}
+
+//return stored values
+
+pragma solidity ^0.5.0;
+contract Test {
+   uint storedData; // State variable
+   constructor() public {
+      storedData = 10;   
+   }
+   function getResult() public view returns(uint){
+      uint a = 1; 
+      uint b = 2;
+      uint result = a + b;
+      uint output = storedData + result;
+      return output; 
+   }
+}
+
+
+// getSum 
+
+contract Test {
+   function getSum(uint a, uint b) public pure returns(uint){      
+      return a + b;
+   }
+   function getSum(uint a, uint b, uint c) public pure returns(uint){      
+      return a + b + c;
+   }
+   function callSumWithTwoArguments() public pure returns(uint){
+      return getSum(1,2);
+   }
+   function callSumWithThreeArguments() public pure returns(uint){
+      return getSum(1,2,3);
+   }
+}
+
+//get,update/compute data
+
+pragma solidity ^0.5.0;
+
+contract Test1 {
+   uint private data;
+   
+   uint public info;
+
+   constructor() public {
+      info = 30;
+   }
+   function increment(uint a) private pure returns(uint) { return a + 1; }
+   function updateData(uint a) public { data = a; }
+   function getData() public view returns(uint) { return data; }
+   function compute(uint a, uint b) internal pure returns (uint) { return a + b; }
+}
+contract Test2 {
+   function getData() public returns(uint) {
+      Test1 info = new Test1();
+      info.updateData(7);         
+      return info.getData();
+   }
+}
+
+contract Test3 is Test1 {
+   uint private result;
+   Test1 private value;
+   
+   constructor() public {
+      value = new Test1();
+   }  
+   function getComputedResult() public {      
+      result = compute(20, 30); 
+     
+   }
+   function getResult() public view returns(uint) { return result; }
+   function getData() public view returns(uint) { return value.info(); }
+}
+
+
+
+
